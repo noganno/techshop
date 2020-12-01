@@ -1,0 +1,1 @@
+<?php 	use soft\helpers\SUrl;    /**     * url functions    */    function url_to($url = null, $scheme = false)	{		return SUrl::to($url, $scheme);	}

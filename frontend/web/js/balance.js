@@ -1,0 +1,1 @@
+$(document).ready(function(){$(document).on('click','.add-to-balance',function(e){e.preventDefault();let id=$(this).attr('data-product-id');let url=$(this).attr('href');$.ajax({url:url,success:function(result){console.log(result);$('.help-compare').find('.count').text(result.countItems);toastr.success(result.message)}})})})

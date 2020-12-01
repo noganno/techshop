@@ -1,0 +1,1 @@
+<?php	// Translation	function t($title = "", $category = 'app'){            return Yii::t($category, $title);	}	

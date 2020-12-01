@@ -1,0 +1,6 @@
+<?php
+
+
+dd($regions);
+
+?>

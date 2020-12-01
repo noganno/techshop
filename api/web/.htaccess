@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /api
+
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-d
+
+
+RewriteRule (?!web\/) index.php/$1

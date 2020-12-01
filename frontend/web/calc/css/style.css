@@ -1,0 +1,147 @@
+#totalSumm label, #totalSumm td, #totalSummTrendy td, #totalSummTrendy label
+{
+    font-weight: bold;
+}
+
+.home_page
+{
+	font-family: Roboto !important;
+	padding: 0px 15px !important;
+	font-size: larger !important;
+	color : black;
+}
+
+h3
+{
+	text-align:center;
+}
+
+body
+{
+	background-color: #FFC740	!important;
+}
+
+button
+{
+	font-family: Roboto !important;
+	padding: 0px 15px !important;
+	font-size: larger !important;
+}
+
+.table-unired, .table-trendy
+{
+    display: none;
+}
+
+#totalSummZmarket label 
+{
+    font-weight: bold;
+}
+
+.container 
+{
+    background-color: #ffc20f;
+}
+
+input 
+{
+    background-color: ffc20f !important;
+    font-weight: bolder;
+}
+
+.container > .for-image 
+{
+	text-align:end;
+	padding:5% 0 0 0;
+}
+
+.table-responsive > .for-image 
+{
+	text-align:start;
+}
+
+.for-image > img
+{
+	max-width:150px;
+}
+
+.for-image
+{
+	margin: 5% 0 0 0;
+}
+.headings
+{
+	font-family: Roboto; 
+	padding-bottom: 11px; 
+	text-align: center;
+	color:#0e2949; 
+}
+
+.unired-red > thead > tr > th
+{
+	border-color:#ff0000;
+	color:#ff0000;
+}
+
+.unired-red > tbody > tr > td , .unired-red > tbody > tr > th
+{
+	border-color:#ff0000;
+}
+
+.zmarket-green > thead > tr > th
+{
+	border-color:#579710;
+	color:#579710;
+}
+
+.zmarket-green > tbody > tr > td , .zmarket-green > tbody > tr > th
+{
+	border-color:#579710;
+}
+
+.trendy-black > thead > tr > th
+{
+	border-color:black;
+	color:black;
+}
+
+.trendy-black > tbody > tr > td , .trendy-black > tbody > tr > th
+{
+	border-color:black;
+}
+
+.unired-static > tr > th
+{
+	background-color:#ff0000;
+	color:white;
+	border-color:#ff0000;
+}
+
+.zmarket-static > tr > th
+{
+	background-color:#579710;
+	color:white;
+	border-color:#579710;
+}
+
+.trendy-static > tr > th
+{
+	background-color:black;
+	color:white;
+	border-color:black;
+}
+
+table.table-bordered > tbody > tr > td
+{
+	border-color:black;
+}
+
+.attention
+{
+	color:red;
+}
+
+/*
+	<!--style="font-family: Roboto; padding-bottom: 11px; text-align: center; color:#0e2949; "-->
+	<!--style="font-family: Roboto; padding-bottom: 11px; text-align: center; color:#0e2949; "-->
+*/

@@ -1,0 +1,116 @@
+.products > .auto-container .products-cards__item > .content > .category {
+    margin-bottom: auto;
+    font-size: 14px;
+    color: #777777;
+    min-height: 45px !important;
+}
+
+#product-basket .modal-dialog .modal-body .no-product-image {
+    display: flex;
+    justify-content: center;
+}
+
+img.page-icon-image {
+    width: 50px !important;
+    height: 50px !important;
+}
+
+.filter-product > .auto-container.container_left-sidebar-2 > .article > .product-wrapper-top .wrapper-block .inner-block > .btn-links a.asc,
+.filter-product > .auto-container.container_left-sidebar-2 > .article > .product-wrapper-top .wrapper-block .inner-block > .btn-links a.desc {
+    background: #777777;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.header-middle > .auto-container > .register > svg {
+    width: 25px !important;
+    height: 25px !important;
+    margin: 0 5px 0 0;
+}
+
+.header-middle > .auto-container {
+    height: 120px;
+}
+
+#product-rassrochka .modal-dialog .modal-body .product-wrapper .product-item .count-product {
+    margin: 10px;
+    margin-left: auto;
+    padding: 10px;
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+#product-rassrochka .modal-dialog .modal-body .product-wrapper .product-item .count-product:hover {
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#product-rassrochka .modal-dialog .modal-body .product-wrapper .product-item .count-product span {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #f4f4f4;
+    margin: 0;
+    text-align: center;
+    line-height: 38px;
+    font-size: 16px;
+}
+
+#product-rassrochka .modal-dialog .modal-body .product-wrapper .product-item .count-product span.value {
+    font-family: "Roboto Bold";
+    background-color: #f4f4f4;
+}
+
+#product-rassrochka .modal-dialog .modal-body .product-wrapper .product-item .count-product span.control {
+    margin: 0;
+    background-color: #ffffff;
+    font-size: 20px;
+    color: #333333;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+#product-rassrochka .modal-dialog .modal-body .product-wrapper .product-item .count-product span.control:hover {
+    color: #ffffff;
+    background-color: #fbc100;
+    cursor: pointer;
+}
+
+#product-rassrochka .modal-dialog .modal-body .product-wrapper .product-item .count-product .addText {
+    margin: 0;
+    margin-top: 10px;
+    color: #777777;
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 567px) {
+    .banner {
+        display: block !important;
+    }
+}
+
+.slider-link-item {
+    cursor: pointer;
+}
+
+.product_yellow_friday{
+    background: black!important;
+    color: #fec20f!important;
+}
