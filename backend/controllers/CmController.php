@@ -3,6 +3,7 @@
 
 namespace backend\controllers;
 
+use backend\components\Log;
 use common\models\Product;
 use common\models\ProductToSklad;
 use common\models\Sklad;
@@ -33,8 +34,6 @@ class CmController extends Controller
         return parent::init();
     }
 
-
-   
 
     public function actionUpdateSkladCount()
     {
@@ -366,8 +365,8 @@ class CmController extends Controller
             $name = $product->Номенклатура;
             $qty = $product->Остаток;
 
-            $sale = $product->ЦенаПродажа;
-            $loan = $product->ЦенаРассрочка;
+            $sale = (float)$product->ЦенаПродажа;
+            $loan = (float)$product->ЦенаРассрочка;
 
             $pr = Product::findOne(['unique_id' => $unique_id]);
 
@@ -410,6 +409,15 @@ class CmController extends Controller
                 }
 
                 $countUpdated += 1;
+
+                Yii::$app->obmenlog->createLog([
+                    'name' => $name,
+                    'guid' => $unique_id,
+                    'action' => Log::ACTION_COUNT_CHANGE,
+                    'wrote_to_site' => 1,
+                    'sklad_id' => $sk->id,
+                    'count' => $qty,
+                ]);
 
             } catch (\Exception $e) {
                 return $e->getMessage() . "<br>" . $pr->id;

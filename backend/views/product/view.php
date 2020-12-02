@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'quantity',
             'quantity',
 //            'stock_status_id',
+        'discount',
             'xit' => [
                 'format' => 'bool'
             ],

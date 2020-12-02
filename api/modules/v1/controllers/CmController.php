@@ -2,6 +2,7 @@
 
 namespace api\modules\v1\controllers;
 
+use backend\components\Log;
 use common\models\Product;
 use common\models\ProductToSklad;
 use common\models\Sklad;
@@ -16,8 +17,6 @@ class CmController extends Controller
 {
 
 
-
-    
 //    public function behaviors()
 //    {
 //        $behaviors = parent::behaviors();
@@ -92,10 +91,24 @@ class CmController extends Controller
 
 
             if (!$productCount) {
-                $this->newProductCount($pr, $sk, $count);
+                $res = $this->newProductCount($pr, $sk, $count);
             } else {
-                $this->updateProductCount($productCount, $count);
+                $res = $this->updateProductCount($productCount, $count);
             }
+
+            if ($res['status']) {
+                Yii::$app->obmenlog->createLog([
+                    'name' => $name,
+                    'guid' => $unique_id,
+                    'action' => Log::ACTION_COUNT_CHANGE,
+                    'wrote_to_site' => 1,
+                    'is_from_1c' => 1,
+                    'sklad_id' => $sk->id,
+                    'count' => $count,
+                ]);
+            }
+
+
         }
 
         return true;
@@ -126,7 +139,7 @@ class CmController extends Controller
 
             try {
                 $type = $priceObject->ВидЦены;
-                $priceAmount = $priceObject->ЦенаВДокументе;
+                $priceAmount = (float)$priceObject->ЦенаВДокументе;
 
                 if ($type == "Полная оплата") {
                     $pr->sale_price = $priceAmount;
@@ -140,6 +153,17 @@ class CmController extends Controller
                         'error' => $pr->errors
                     ];
                 }
+
+                Yii::$app->obmenlog->createLog([
+                    'name' => $name,
+                    'guid' => $unique_id,
+                    'sale_price' => $pr->sale_price,
+                    'loan_price' => $pr->loan_price,
+                    'action' => Log::ACTION_PRICE_CHANGE,
+                    'wrote_to_site' => 1,
+                    'is_from_1c' => 1,
+                ]);
+
             } catch (\Exception $e) {
                 return true;
             }
@@ -173,6 +197,15 @@ class CmController extends Controller
             if (!$pr->save()) {
                 return $pr->errors;
             }
+            Yii::$app->obmenlog->createLog([
+                'name' => $pr->name,
+                'guid' => $pr->unique_id,
+//                'sale_price' => $pr->sale_price,
+//                'loan_price' => $pr->loan_price,
+                'action' => Log::ACTION_NAME_CHANGE,
+                'wrote_to_site' => 1,
+                'is_from_1c' => 1,
+            ]);
         }
 
 

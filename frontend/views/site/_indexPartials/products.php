@@ -14,20 +14,18 @@ $newProducts = Yii::$app->db->cache(function () {
         ->active()
         ->addOrderBy(['product.new_time' => SORT_DESC])
         ->andWhere(['>=', 'product.new_time', time() - 3 * 86400])
-        //->limit(20)
+        ->limit(30)
         ->with('categories')
         ->with('category')
         ->distinct()
         ->all();
 });
 
-
-
 $recommendedProducts = Yii::$app->db->cache(function () {
     return Product::find()
         ->active()
         ->andWhere(['product.recommend' => 1])
-       // ->limit(50)
+        ->limit(30)
         ->with('categories')
         ->with('category')
         ->all();
@@ -36,7 +34,7 @@ $recommendedProducts = Yii::$app->db->cache(function () {
 $hitProducts = Yii::$app->db->cache(function () {
     return Product::find()
         ->active()
-       // ->limit(50)
+        ->limit(30)
         ->andWhere(['product.xit' => 1])
         ->with('categories')
         ->with('category')
@@ -46,7 +44,7 @@ $hitProducts = Yii::$app->db->cache(function () {
 $yellow_friday = Yii::$app->db->cache(function () {
     return Product::find()
         ->active()
-        //->limit(50)
+        ->limit(50)
         ->andWhere(['product.yellow_friday' => 1])
         ->with('categories')
         ->with('category')
@@ -54,17 +52,17 @@ $yellow_friday = Yii::$app->db->cache(function () {
 });
 
 
-
 ?>
 <div class="products">
     <div class="auto-container">
         <?php if (!empty($hitProducts)): ?>
             <h1 class="title"><?= Yii::t('app', 'hamma_sotib_olyapti') ?></h1>
-            <div class="products-cards__carousel owl-carousel owl-theme">
+            <div class="products-cards__carousel hit-products__carousel owl-carousel owl-theme">
                 <!-- Begin to display products for first carousel -->
                 <?php foreach ($hitProducts as $model) : ?>
                     <div class="products-cards__item bestseller_new_recommended" data-id="<?= $model->id ?>">
                         <span class="product_bestseller"><?= t('Hit sale') ?></span>
+                        <?= $model->getDiscountRedText() ?>
                         <a href="<?= $model->detailUrl ?>" class="img">
                             <img src="/thumb.php?src=<?= '/frontend/web' . $model->getImage('card') ?>&w=140&h=140&a=t&zc=3">
                         </a>
@@ -73,7 +71,12 @@ $yellow_friday = Yii::$app->db->cache(function () {
                             <a href="<?= $model->detailUrl ?>" class="name">
                                 <?= $model->name ?>
                             </a>
-                            <h3 class="price"><span><?= Yii::$app->formatter->asSum($model->sale_price) ?></span></h3>
+                            <h3 class="price">
+                                <span>
+                                     <?= $model->getDiscountOldDeletedText() ?>
+                                    <?= Yii::$app->formatter->asSum($model->sale_price) ?>
+                                </span>
+                            </h3>
                             <div class="btns">
                             <span href="#" class="btn btn-yellow add-to-cart" data-product-id="<?= $model->id ?>">
                                <?= Yii::$app->help->getCardSvg() ?>
@@ -88,6 +91,7 @@ $yellow_friday = Yii::$app->db->cache(function () {
                     </div>
                 <?php endforeach; ?>
                 <!-- End to display products for first carousel -->
+
             </div>
         <?php endif ?>
         <?php if (!empty($recommendedProducts)): ?>
@@ -97,6 +101,7 @@ $yellow_friday = Yii::$app->db->cache(function () {
                 <?php foreach ($recommendedProducts as $model) : ?>
                     <div class="products-cards__item bestseller_new_recommended" data-id="<?= $model->id ?>">
                         <span class="product_recommended"><?= t('Recommended') ?></span>
+                        <?= $model->getDiscountRedText() ?>
                         <a href="<?= $model->detailUrl ?>" class="img">
                             <img src="/thumb.php?src=<?= '/frontend/web' . $model->getImage('card') ?>&w=140&h=140&a=t&zc=3">
                         </a>
@@ -105,7 +110,12 @@ $yellow_friday = Yii::$app->db->cache(function () {
                             <a href="<?= $model->detailUrl ?>" class="name">
                                 <?= $model->name ?>
                             </a>
-                            <h3 class="price"><span><?= Yii::$app->formatter->asSum($model->sale_price) ?></span></h3>
+                            <h3 class="price">
+                                <span>
+                                     <?= $model->getDiscountOldDeletedText() ?>
+                                     <?= Yii::$app->formatter->asSum($model->sale_price) ?>
+                                </span>
+                            </h3>
                             <div class="btns">
                             <span href="#" class="btn btn-yellow add-to-cart" data-product-id="<?= $model->id ?>">
                                <?= Yii::$app->help->getCardSvg() ?>
@@ -129,6 +139,7 @@ $yellow_friday = Yii::$app->db->cache(function () {
                 <?php foreach ($newProducts as $model) : ?>
                     <div class="products-cards__item bestseller_new_recommended" data-id="<?= $model->id ?>">
                         <span class="product_new"><?= t('New') ?></span>
+                        <?= $model->getDiscountRedText() ?>
                         <a href="<?= $model->detailUrl ?>" class="img">
                             <img src="/thumb.php?src=<?= '/frontend/web' . $model->getImage('card') ?>&w=140&h=140&a=t&zc=3">
                         </a>
@@ -137,7 +148,12 @@ $yellow_friday = Yii::$app->db->cache(function () {
                             <a href="<?= $model->detailUrl ?>" class="name">
                                 <?= $model->name ?>
                             </a>
-                            <h3 class="price"><span><?= Yii::$app->formatter->asSum($model->sale_price) ?></span></h3>
+                            <h3 class="price">
+                                <span>
+                                     <?= $model->getDiscountOldDeletedText() ?>
+                                     <?= Yii::$app->formatter->asSum($model->sale_price) ?>
+                                </span>
+                            </h3>
                             <div class="btns">
                             <span href="#" class="btn btn-yellow add-to-cart" data-product-id="<?= $model->id ?>">
                                <?= Yii::$app->help->getCardSvg() ?>
@@ -161,6 +177,7 @@ $yellow_friday = Yii::$app->db->cache(function () {
                 <?php foreach ($yellow_friday as $model) : ?>
                     <div class="products-cards__item bestseller_new_recommended" data-id="<?= $model->id ?>">
                         <span class="product_new product_yellow_friday"><?= t('Yellow Friday Badge') ?></span>
+                        <?= $model->getDiscountRedText() ?>
                         <a href="<?= $model->detailUrl ?>" class="img">
                             <img src="/thumb.php?src=<?= '/frontend/web' . $model->getImage('card') ?>&w=140&h=140&a=t&zc=3">
                         </a>
@@ -169,7 +186,12 @@ $yellow_friday = Yii::$app->db->cache(function () {
                             <a href="<?= $model->detailUrl ?>" class="name">
                                 <?= $model->name ?>
                             </a>
-                            <h3 class="price"><span><?= Yii::$app->formatter->asSum($model->sale_price) ?></span></h3>
+                            <h3 class="price">
+                                <span>
+                                     <?= $model->getDiscountOldDeletedText() ?>
+                                     <?= Yii::$app->formatter->asSum($model->sale_price) ?>
+                                </span>
+                            </h3>
                             <div class="btns">
                             <span href="#" class="btn btn-yellow add-to-cart" data-product-id="<?= $model->id ?>">
                                <?= Yii::$app->help->getCardSvg() ?>
@@ -188,3 +210,6 @@ $yellow_friday = Yii::$app->db->cache(function () {
         <?php endif ?>
     </div>
 </div>
+
+
+

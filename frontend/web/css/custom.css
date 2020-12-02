@@ -114,3 +114,75 @@ img.page-icon-image {
     background: black!important;
     color: #fec20f!important;
 }
+
+
+
+
+
+.products > .auto-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+
+.products > .auto-container .products-cards__carousel > .owl-nav {
+    position: absolute;
+    top: -80px;
+    width: 115px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    right: 0;
+    padding: 0;
+}
+
+.products > .auto-container .products-cards__carousel > .owl-nav > button {
+    padding: 0;
+    margin: 0;
+    background-color: transparent !important;
+}
+
+.products > .auto-container .products-cards__carousel > .owl-nav > button img {
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.products > .auto-container .products-cards__carousel > .owl-nav > button img:hover {
+    -webkit-filter: brightness(0);
+    filter: brightness(0);
+}
+
+.products > .auto-container .products-cards__carousel > .owl-nav > button:focus {
+    outline: none;
+}
+
+.discount-red-text{
+
+    z-index: 99;
+    position: absolute;
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    left: 10px !important;
+    top: 33px !important;
+    font-size: 12px !important;
+    color: red;
+    font-family: "GothamPro-Bold";
+}
+
+.discount-del-label{
+    color: #999!important;
+    font-family: inherit;
+    text-decoration: line-through #999 solid;
+}

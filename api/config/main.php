@@ -23,6 +23,9 @@ return [
     ],
     'components' => [
 
+        'obmenlog' => [
+            'class' => 'backend\components\Log',
+        ],
 
         'i18n' => [
             'translations' => [

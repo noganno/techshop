@@ -71,7 +71,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="auto-container">
         <!-- Start of .product-page__info -->
-        <div class="product-page__info">
+        <div class="product-page__info bestseller_new_recommended discount-yellow">
+
+           <?= $model->getProductLabel() ?>
+           <?= $model->getDiscountCircleLabel() ?>
 
             <div class="img">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
@@ -101,30 +104,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1 class="title"><?= ($model->name) ?></h1>
                 <ul class="content-prices">
 
+
                     <?php if (intval($model->sale_price) > 0): ?>
                         <li>
                             <span class="text"><?= t('Sale Price') ?></span>
                             <span class="price"><?= Yii::$app->formatter->asSum($model->sale_price) ?></span>
                         </li>
                     <?php endif ?>
-                    <!--    <?php /*if (intval($model->loan_price) > 0 ): */ ?>
-                        <li>
-                            <span class="text"><? /*= t('Loan Price') */ ?></span>
-                            <span class="price"><? /*= Yii::$app->formatter->asSum($model->loan_price) */ ?></span>
-                        </li>
-                    --><?php /*endif */ ?>
 
-                    <?php if ($model->price > $model->sale_price): ?>
+                    <?php if ($model->hasDiscount): ?>
                         <li>
                             <span class="text"><?= t('Old cost') ?></span>
                             <span class="price text line-through">
-                                <?= Yii::$app->formatter->asSum($model->price) ?>
+                                <?= ($model->oldPrice) ?>
                             </span>
                         </li>
                         <li>
                             <span class="text"><?= t('Экономия') ?></span>
                             <span class="price text">
-                                <?= Yii::$app->formatter->asSum($model->price - $model->sale_price) ?>
+                                <?= ($model->economPrice) ?>
                             </span>
                         </li>
                     <?php endif ?>
@@ -132,9 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="btns">
 
 
-
-
-<!--					--><?/*= a(t('Fast order'), ['fast-order/show', 'id' => $model->id], [
+                    <!--					--><? /*= a(t('Fast order'), ['fast-order/show', 'id' => $model->id], [
 
                         'class' => '   btn btn-yellow fast-order-modal-button',
 
@@ -143,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'onclick' => "ym(39788475, 'reachGoal', 'Form Buy'); gtag('event', 'click', {'event_category': 'cart'}); return true;",
 
 
-                    ]) */?>
+                    ]) */ ?>
 
                     <a herf="#" class="btn btn-yellow add-to-cart" data-product-id="<?= $model->id ?>"
                        data-toggle="modal" data-target="#product-basket">
@@ -155,8 +151,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= t('В рассрочку') ?>
                     </a>
 
-                                        <span href="#" class="btn btn-balance-2 add-to-cart" data-toggle="modal"
-                          data-target="#product-basket" data-product-id="<?= $model->id  ?>">
+                    <span href="#" class="btn btn-balance-2 add-to-cart" data-toggle="modal"
+                          data-target="#product-basket" data-product-id="<?= $model->id ?>">
 
 
                                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="-5px" y="0px"

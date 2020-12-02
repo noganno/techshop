@@ -52,8 +52,7 @@ class Product extends \soft\db\SActiveRecord
                 ->andWhere(['sklad.status' => 1])
                 ->andWhere(['sklad.region_id' => $activeRegion->id])
                 ->joinWith('productToSklads')
-                ->andWhere(['>', 'product_to_sklad.quantity' , 0])
-                ;
+                ->andWhere(['>', 'product_to_sklad.quantity', 0]);
         }
         return $query->active()->multilingual();
     }
@@ -75,27 +74,27 @@ class Product extends \soft\db\SActiveRecord
      */
 
 
-   public function getGalleryImages()
-     {
-         return $this->hasMany(\common\models\GalleryImage::class, ['ownerId' => 'id'])
-             ->andWhere(['type' => 'product'])
-             ->orderBy(['rank' => SORT_ASC]);
-     }
+    public function getGalleryImages()
+    {
+        return $this->hasMany(\common\models\GalleryImage::class, ['ownerId' => 'id'])
+            ->andWhere(['type' => 'product'])
+            ->orderBy(['rank' => SORT_ASC]);
+    }
 
 
-       public function getImages($type = 'preview')
-      {
+    public function getImages($type = 'preview')
+    {
 
-          $images = $this->galleryImages;
-          $result = [];
+        $images = $this->galleryImages;
+        $result = [];
 
-          foreach ($images as $image) {
-              $result[] = "/images/gallery/product/{$this->id}/{$image->id}/{$type}.jpg";
-          }
+        foreach ($images as $image) {
+            $result[] = "/images/gallery/product/{$this->id}/{$image->id}/{$type}.jpg";
+        }
 
-          return $result;
+        return $result;
 
-      }
+    }
 
 
     /**
@@ -186,23 +185,23 @@ class Product extends \soft\db\SActiveRecord
         if ($category != null) {
             if ($category->lvl == 1) {
                 $params[0] = 'product/category';
-                $params['c1'] =  $category->parent->slug;
+                $params['c1'] = $category->parent->slug;
                 $params['id'] = $this->id;
                 return url_to($params);
             }
 
             if ($category->lvl == 2) {
                 $params[0] = 'product/category';
-                $params['c1'] =  $category->parent->slug;
-                $params['c2'] =  $category->slug;
+                $params['c1'] = $category->parent->slug;
+                $params['c2'] = $category->slug;
                 $params['id'] = $this->id;
                 return url_to($params);
             }
             if ($category->lvl == 3) {
                 $params[0] = 'product/detail';
-                $params['c1'] =  $category->parent->parent->slug;
-                $params['c2'] =  $category->parent->slug;
-                $params['c3'] =  $category->slug;
+                $params['c1'] = $category->parent->parent->slug;
+                $params['c2'] = $category->parent->slug;
+                $params['c3'] = $category->slug;
                 $params['id'] = $this->id;
                 return url_to($params);
             }
@@ -219,7 +218,7 @@ class Product extends \soft\db\SActiveRecord
     {
         $lang = Yii::$app->language;
         return $this->hasMany(ProductAttribute::className(), ['product_id' => 'id'])
-            ->andWhere(['product_attribute.language' => $lang, ]);
+            ->andWhere(['product_attribute.language' => $lang,]);
     }
 
     public function getAttributesNames()
@@ -244,7 +243,7 @@ class Product extends \soft\db\SActiveRecord
     public static function findActiveProduct($id = '')
     {
         $product = Product::getDb()->cache(function ($db) use ($id) {
-            return Product::find()->active()->andWhere(['product.id'=>$id])->one();
+            return Product::find()->active()->andWhere(['product.id' => $id])->one();
         });
         return $product;
     }
@@ -270,7 +269,7 @@ class Product extends \soft\db\SActiveRecord
 
     public function getIsHit()
     {
-       return $this->xit;
+        return $this->xit;
     }
 
     public function getIsRecommend()
@@ -298,11 +297,11 @@ class Product extends \soft\db\SActiveRecord
 
     public function getStockStatus()
     {
-        if ($this->quantity > 0) {
-            return t('In stock');
-        } else {
-            return t('Temporarily not');
-        }
+//        if ($this->quantity > 0) {
+        return t('In stock');
+//        } else {
+//            return t('Temporarily not');
+//        }
     }
 
     public function getProductToSklads()
@@ -312,13 +311,13 @@ class Product extends \soft\db\SActiveRecord
 
     public function getSklads()
     {
-        return  $this->hasMany(Sklad::class, ['id' => 'sklad_id'])
+        return $this->hasMany(Sklad::class, ['id' => 'sklad_id'])
             ->via('productToSklads');
     }
 
     public function getQuantity()
     {
-        return  $this->getProductToSklads()->sum('quantity');
+        return $this->getProductToSklads()->sum('quantity');
     }
 
     public function getRelatedProducts()
@@ -333,7 +332,7 @@ class Product extends \soft\db\SActiveRecord
 
     public function getMetaTitle()
     {
-        if ($this->meta_title == ''){
+        if ($this->meta_title == '') {
             return $this->name;
         }
         return $this->meta_title;
@@ -341,7 +340,7 @@ class Product extends \soft\db\SActiveRecord
 
     public function getMetaDescription()
     {
-        if ($this->meta_description == '' && $this->category != null){
+        if ($this->meta_description == '' && $this->category != null) {
             return $this->category->getMetaDescription();
         }
         return $this->meta_description;
@@ -349,7 +348,7 @@ class Product extends \soft\db\SActiveRecord
 
     public function getMetaKeywords()
     {
-        if ($this->meta_keyword == '' && $this->category != null){
+        if ($this->meta_keyword == '' && $this->category != null) {
             return $this->category->getMetaKeywords();
         }
         return $this->meta_keyword;
@@ -357,10 +356,80 @@ class Product extends \soft\db\SActiveRecord
 
     public function getMetaImage()
     {
-        if ($this->getImage() == '' && $this->category != null){
+        if ($this->getImage() == '' && $this->category != null) {
             return $this->category->getMainImage();
         }
         return $this->getImage();
+    }
+
+    public function getHasDiscount()
+    {
+        return intval($this->discount) > 0;
+    }
+
+    /**
+     * Agar tovarda skidka bo'lsa, tovar narxiga skidka bo'lgan narxni qo'shib, eski narxni hisoblaydi
+     * Eski narx hozirgi narxdan katta bo'ladi
+     * @return integer
+     */
+    public function getOldPrice()
+    {
+
+        if (!$this->hasDiscount) {
+            return;
+        }
+        $oldPrice = $this->sale_price * 100 / (100 - $this->discount);
+        return Yii::$app->formatter->asSum($oldPrice);
+    }
+
+
+    /**
+     * Agar tovarda skidka bo'lsa, tovar narxiga skidka bo'lgan narxni narxni hisoblaydi
+     * @return integer
+     */
+    public function getEconomPrice()
+    {
+
+        if (!$this->hasDiscount) {
+            return 0;
+        }
+        $oldPrice = $this->sale_price * 100 / (100 - $this->discount);
+        return Yii::$app->formatter->asSum($oldPrice - $this->sale_price);
+
+    }
+
+    public function getDiscountCircleLabel()
+    {
+        if ($this->hasDiscount)
+            return '<span class="discount-yellow__percent">' . $this->discount . '%</span>';
+        else return null;
+    }
+
+    public function getDiscountRedText()
+    {
+        if ($this->hasDiscount)
+            return '<span class="discount-red-text">' . t('Discount') . " " . $this->discount . '%</span>';
+        else return null;
+    }
+
+    public function getDiscountOldDeletedText()
+    {
+        if ($this->hasDiscount)
+            return '<span class="discount-del-label">' . $this->oldPrice . '</span><br>';
+        else return null;
+    }
+
+    public function getProductLabel()
+    {
+        if ($this->yellow_friday == 1)
+            return "<span class='product_new product_yellow_friday'>" . t('Yellow Friday Badge') . "</span>";
+        elseif ($this->isNew)
+            return "<span class='product_new'>" . t('New') . "</span>";
+        elseif ($this->isHit)
+            return "<span class='product_bestseller'>" . t('Hit sale') . "</span>";
+        elseif ($this->isRecommend)
+            return "<span class='product_recommended'>" . t('Recommended') . "</span>";
+        return "";
     }
 
 }

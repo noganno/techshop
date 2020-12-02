@@ -100,7 +100,11 @@ return [
     ],
     'components' => [
 
-     
+        'obmenlog' => [
+            'class' => 'backend\components\Log',
+        ],
+
+
         'ipakyuli' => [
             'class' => 'backend\modules\ipakyuli\components\IpakYuli',
         ],

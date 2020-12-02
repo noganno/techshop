@@ -86,8 +86,9 @@ use kartik\select2\Select2;
     <div class="col-md-4">
         <?= $form->field($model, 'deposit')->textInput() ?>
     </div>
+
     <div class="col-md-4">
-        <?= $form->field($model, 'quantity')->input('number', ['min' => 0]) ?>
+        <?= $form->field($model, 'discount')->input('number', ['min' => 0, 'max' => 100 ]); ?>
     </div>
 </div>
 
@@ -98,6 +99,7 @@ use kartik\select2\Select2;
         'offText' => Yii::t('app', 'Inactive'),
     ],
 ]); ?>
+
 <?= $form->field($model, 'recommend')->widget(SwitchInput::classname(), []); ?>
 <?= $form->field($model, 'xit')->widget(SwitchInput::classname(), [
 

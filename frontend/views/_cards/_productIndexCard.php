@@ -6,13 +6,8 @@ use yii\helpers\Html;
 
 ?>
 <div class="products-cards__item bestseller_new_recommended" data-id="<?= $model->id ?>">
-    <?php if ($model->isNew): ?>
-        <span class="product_new"><?= t('New') ?></span>
-    <?php elseif ($model->isHit): ?>
-        <span class="product_bestseller"><?= t('Hit sale') ?></span>
-    <?php elseif ($model->isRecommend): ?>
-        <span class="product_recommended"><?= t('Recommended') ?></span>
-    <?php endif ?>
+    <?= $model->getProductLabel() ?>
+    <?= $model->getDiscountRedText() ?>
     <a href="<?= $model->detailUrl ?>" class="img">
         <img src="/thumb.php?src=<?= '/frontend/web'.$model->getImage('card') ?>&w=140&h=140&a=t&zc=3">
     </a>
@@ -21,7 +16,10 @@ use yii\helpers\Html;
         <a href="<?= $model->detailUrl ?>" class="name">
             <?= $model->name ?>
         </a>
-        <h3 class="price"><span><?= Yii::$app->formatter->asSum($model->sale_price) ?></span></h3>
+        <h3 class="price">
+            <?= $model->getDiscountOldDeletedText() ?>
+            <span><?= Yii::$app->formatter->asSum($model->sale_price) ?></span>
+        </h3>
         <!--        <p class="description">В месяц по 120 000 сум Предоплата 10% </p>-->
         <div class="btns">
             <span href="#" class="btn btn-yellow add-to-cart" data-product-id="<?= $model->id ?>">

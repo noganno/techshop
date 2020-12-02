@@ -114,7 +114,7 @@ $columns = [
             return $m->totalQuantity;
         },
 
-        'filter' => \yii\helpers\ArrayHelper::map(\common\models\Sklad::find()->all(), 'id', 'name'),
+        'filter' => \yii\helpers\ArrayHelper::map(\common\models\Sklad::find()->all(), 'id', 'description'),
         'filterType' => GridView::FILTER_SELECT2,
         'filterWidgetOptions' => [
             'options' => ['prompt' => Yii::t('app', 'Sklads')],
