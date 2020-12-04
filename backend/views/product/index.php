@@ -140,6 +140,7 @@ $columns = [
             'recommend' => Yii::t('app', 'Recommend'),
             'xit' => Yii::t('app', 'Xit'),
             'yellow_friday' => Yii::t('app', 'Yellow Friday'),
+            'new' => Yii::t('app', 'New'),
         ],
     ],
     'actionColumn',

@@ -16,25 +16,6 @@ set_time_limit(3600);
 class CmController extends Controller
 {
 
-
-//    public function behaviors()
-//    {
-//        $behaviors = parent::behaviors();
-//        $behaviors['basicAuth'] = [
-//            'class' => \yii\filters\auth\HttpBasicAuth::className(),
-//            'auth' => function ($username, $password) {
-//
-//                $user = User::find()->where(['username' => $username])->one();
-//                if ((Yii::$app->getSecurity()->validatePassword($password, $user->password_hash))) {
-//                    return $user;
-//                }
-//                throw new yii\web\UnauthorizedHttpException;
-//            },
-//        ];
-//        return $behaviors;
-//    }
-
-
     public function init()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -186,6 +167,7 @@ class CmController extends Controller
 
             $pr = Product::findOne(['unique_id' => $unique_id]);
 
+
             if (!$pr) {
                 $pr = new Product();
                 $pr->unique_id = $unique_id;
@@ -194,9 +176,12 @@ class CmController extends Controller
             }
             $pr->name_ru = $name_ru;
             $pr->is_name_changed = 1;
+
+
             if (!$pr->save()) {
                 return $pr->errors;
             }
+
             Yii::$app->obmenlog->createLog([
                 'name' => $pr->name,
                 'guid' => $pr->unique_id,

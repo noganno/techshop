@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         '/css/main.custom.css',
         '/css/main.css',
         '/css/main2.css',
+        '/css/slick.css',
         '/css/custom.css',
         '/css/material-design/css/material-design-iconic-font.min.css'
     ];
@@ -36,6 +37,7 @@ class AppAsset extends AssetBundle
         '/js/jquery.fancybox.min.js',
         '/js/cookie.js',
         '/js/jquery.hsmenu.min.js',
+        "/js/slick.min.js",
         '/js/index.js',
         '/js/flyToCart.js',
         '/js/custom.js',
@@ -44,6 +46,7 @@ class AppAsset extends AssetBundle
         'js/balance.js',
         "ajaxCrud/ModalRemote.js",
         "js/fastOrder.js",
+
     ];
 
     public $depends = [
